@@ -1,0 +1,44 @@
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database inventory;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> use inventory;
+Database changed
+mysql> create table PRODUCT(PID int primary key,PNAME varchar(10),PRICE float );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> create table SALE(SID int, PID int primary key, QNTY int foreign key(PID) references PRODUCT(PID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(PID) references PRODUCT(PID))' at line 1
+mysql> create table SALE(SID int, PID int primary key, QNTY int, foreign key(PID) references PRODUCT(PID));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table SUPPLIER(SUPPID int, SUPPNAME varchar(10), ADDRESS varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table SUPPLIER add primary key(SUPPID);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create user 'rajesh'@localhost identified by 'rajesh123';
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> grant all privileges on *.* to 'rajesh'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create user 'mohit'@localhost identified by 'rajesh123';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant select on inventory.* to 'mohit'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
