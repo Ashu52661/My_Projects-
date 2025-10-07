@@ -1,0 +1,73 @@
+declare
+r number;
+bn varchar(30);
+isd date;
+rd date;
+d int;
+amt float(62);
+begin
+r:=&r;
+bn:='&bn';
+rd:=sysdate;
+select issuedate into isd from borrower where rollno=r and bookname=bn and
+status='l';
+d:=rd-isd;
+dbms_output.Put_line('no of days' ||d);
+if d<15 then
+dbms_output.Put_line('no fine');
+update borrower set status='R' where rollno=r and bookname=bn;
+elsif d>15 and d>30 then
+amt:=d*5;
+update borrower set status='R' where rollno=r and bookname=bn;
+elsif d>30 then
+amt:=d*50;
+update borrower set status = 'R' where rollno = r and bookname = bn;
+else
+dbms_output.Put_line('record not match');
+end if;
+if amt>0 then
+insert into fine values(r,rd, amt);
+end if;
+Exception
+when no_data_found then
+dbms_output.Put_line('record not match for the table');
+end;
+/
+
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Tue Sep 2 20:32:37 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle. All rights reserved.
+
+Enter user-name: system
+Enter password:
+Last Successful login time: Tue Sep 02 2025 16:27:35+05:30
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+SQL> create table borrower (rollno int, name varchar(30), issuedate date, bookname varchar(30), status varchar(1));
+Table created.
+SQL> insert into borrower values (18, 'divya', '12-aug-2025', 'dbms','l');
+1 row created.
+SQL> create table fine(rollno int, returndate date, amount float(62));
+Table created.
+SQL> insert into fine values (18,'19-aug-2025',280);
+1 row created.
+SQL> SET SERVEROUTPUT ON;
+SQL> @C:\Users\HP\OneDrive\Desktop\TE-A1\prog4.sql
+Enter value for r: 18
+old 9: r:=&r;
+new 9: r:=18;
+Enter value for bn: dbms
+old 10: bn:='&bn';
+new 10: bn:='dbms';
+no of days 28
+PL/SQL procedure successfully completed.
+SQL> select * from fine;
+ROLLNO RETURNDAT AMOUNT
+
+--------- --------- ----------
+
+18 19-AUG-25 280
+18 02-SEP-25 240
