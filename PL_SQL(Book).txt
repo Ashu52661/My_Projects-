@@ -48,7 +48,7 @@ Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
 Version 21.3.0.0.0
 SQL> create table borrower (rollno int, name varchar(30), issuedate date, bookname varchar(30), status varchar(1));
 Table created.
-SQL> insert into borrower values (18, 'divya', '12-aug-2025', 'dbms','l');
+SQL> insert into borrower values (18, 'Asmita', '12-aug-2025', 'dbms','l');
 1 row created.
 SQL> create table fine(rollno int, returndate date, amount float(62));
 Table created.
@@ -71,3 +71,4 @@ ROLLNO RETURNDAT AMOUNT
 
 18 19-AUG-25 280
 18 02-SEP-25 240
+
