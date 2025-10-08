@@ -1,0 +1,250 @@
+MongoDB database: (create,insert delete,update operations)
+
+show dbs
+admin 40.00 KiB
+config 36.00 KiB
+local 64.00 KiB
+use demo;
+switched to db demo
+db.createCollection('stud');
+{ ok: 1 }
+show collections;
+stud
+db.stud.insertOne({rollno:201,name:'Asmita',address:'abc chok'});
+{
+acknowledged: true,
+insertedId: ObjectId('68d76fb63080fa3de0cebea4')
+}
+db.stud.find();
+[
+{
+_id: ObjectId('68d76fb63080fa3de0cebea4'),
+rollno: 201,
+name: 'Asmita',
+address: 'abc chok'
+}
+]
+db.stud.insertMany([{rollno:102,name:'Prachi',address:'Mumbai'},{rollno:202,name:'Natasha',address:'Pyne'}]);
+{
+acknowledged: true,
+insertedIds: {
+'0': ObjectId('68d7708f3080fa3de0cebea5'),
+'1': ObjectId('68d7708f3080fa3de0cebea6')
+}
+}
+db.stud.find();
+[
+{
+_id: ObjectId('68d76fb63080fa3de0cebea4'),
+rollno: 201,
+name: 'Asmita',
+address: 'abc chok'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea5'),
+rollno: 102,
+name: 'Prachi',
+address: 'Mumbai'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea6'),
+rollno: 202,
+name: 'Natasha',
+address: 'Pyne'
+}
+]
+db.stud.find().pretty();
+[
+{
+_id: ObjectId('68d76fb63080fa3de0cebea4'),
+rollno: 201,
+name: 'Asmita',
+address: 'abc chok'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea5'),
+rollno: 102,
+name: 'Prachi',
+address: 'Mumbai'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea6'),
+rollno: 202,
+name: 'Natasha',
+address: 'Pyne'
+}
+]
+db.stud.find({rollno:{$gt:102}});
+[
+{
+_id: ObjectId('68d76fb63080fa3de0cebea4'),
+rollno: 201,
+name: 'Asmita',
+address: 'abc chok'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea6'),
+rollno: 202,
+name: 'Natasha',
+address: 'Pyne'
+}
+]
+db.stud.updateOne({rollno:102},{$set:{name:'Mohini'}});
+{
+acknowledged: true,
+insertedId: null,
+matchedCount: 1,
+modifiedCount: 1,
+upsertedCount: 0
+}
+db.stud.find();
+[
+{
+_id: ObjectId('68d76fb63080fa3de0cebea4'),
+rollno: 201,
+name: 'Asmita',
+address: 'abc chok'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea5'),
+rollno: 102,
+name: 'Mohini',
+address: 'Mumbai'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea6'),
+rollno: 202,
+name: 'Natasha',
+address: 'Pyne'
+}
+]
+db.stud.deleteOne({rollno:201});
+{ acknowledged: true, deletedCount: 1 }
+demo> db.stud.find();
+[
+{
+_id: ObjectId('68d7708f3080fa3de0cebea5'),
+rollno: 102,
+name: 'Mohini',
+address: 'Mumbai'
+},
+{
+_id: ObjectId('68d7708f3080fa3de0cebea6'),
+rollno: 202,
+name: 'Natasha',
+address: 'Pyne'
+}
+]
+
+
+Que) Problem:Create collection product having data : pid,pname,price,qty change the price when price of product less than 100,update to 200.Display the record.
+
+show dbs;
+admin 40.00 KiB
+config 108.00 KiB
+demo 68.00 KiB
+local 64.00 KiB
+test 8.00 KiB
+db.createCollection('product');
+{ ok: 1 }
+db.product.insertMany([{pid:202,pname:'notebook',price:90},
+... {pid:203,pname:'pen',price:30},
+... {pid:204,pname:'eraser',price:120},
+... {pid:205,pname:'pencil',price:70},
+... {pid:206,pname:'sharpener',price:150},
+... {pid:207,pname:'scale',price:200}]);
+{
+acknowledged: true,
+insertedIds: {
+'0': ObjectId('68d77d9d6f48a01456cebea4'),
+'1': ObjectId('68d77d9d6f48a01456cebea5'),
+'2': ObjectId('68d77d9d6f48a01456cebea6'),
+'3': ObjectId('68d77d9d6f48a01456cebea7'),
+'4': ObjectId('68d77d9d6f48a01456cebea8'),
+'5': ObjectId('68d77d9d6f48a01456cebea9')
+}
+}
+db.product.find();
+[
+{
+_id: ObjectId('68d77d9d6f48a01456cebea4'),
+pid: 202,
+pname: 'notebook',
+price: 90
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea5'),
+pid: 203,
+pname: 'pen',
+price: 30
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea6'),
+pid: 204,
+
+pname: 'eraser',
+price: 120
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea7'),
+pid: 205,
+pname: 'pencil',
+price: 70
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea8'),
+pid: 206,
+pname: 'sharpener',
+price: 150
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea9'),
+pid: 207,
+pname: 'scale',
+price: 200
+}
+]
+db.product.updateMany({price:{$lt:100}},{$set:{price:200}});
+{
+acknowledged: true,
+matchedCount: 3,
+modifiedCount: 3,
+}
+db.product.find();
+[
+{
+_id: ObjectId('68d77d9d6f48a01456cebea4'),
+pid: 202,
+pname: 'notebook',
+price: 200
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea5'),
+pid: 203,
+pname: 'pen',
+price: 200
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea6'),
+pid: 204,
+pname: 'eraser',
+price: 120
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea7'),
+pid: 205,
+pname: 'pencil',
+price: 200
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea8'),
+pid: 206,
+pname: 'sharpener',
+price: 150
+},
+{
+_id: ObjectId('68d77d9d6f48a01456cebea9'),
+pid: 207,
+pname: 'scale',
+price: 200
+}]
