@@ -1,0 +1,507 @@
+#Project on emp+loyee managment system
+import mysql.connector as driver
+import sys
+import os
+def clearscreen():
+    for i in range(10):
+        print()
+def menu():
+    while True:
+        print('.....MENU.....')
+        print('1. Create Database')
+        print('2. Show database')
+        print('3. Create table')
+        print('4. Show tables')
+        print('5. Insert record')
+        print('6. Update record')
+        print('7. Delete record')
+        print('8. Search record')
+        print('9. Desplay record')
+        print('10. Exit...')
+        clearscreen()
+        choice=int(input('enter your choice from 1-10 :'))
+        if (choice==1):
+            Create_database()
+        elif (choice==2):
+            Show_database()
+        elif (choice==3):
+            Create_table()
+        elif (choice==4):
+            Show_table()
+        elif (choice==5):
+            Insert_record()
+        elif (choice==6):
+            Update_record()
+        elif (choice==7):
+            Delete_record()
+        elif (choice==8):     
+            Search_record()
+        elif (choice==9):
+            Display_record()
+        elif (choice==10):
+            break
+        else:
+            print('wrong choice!!!')
+        input('press ENTER KEY to continue....')
+    else:
+        sys.exit()
+# this code is to create a database Employee if not exist
+def Create_database():
+    try:
+        con=driver.connect(host='localhost',user='root',passwd='ishoulddie')
+        if con.is_connected():
+            # succissfully connected to mysql
+            cur=con.cursor()
+            cur.execute('create database employeeee')
+            print()
+            print('database created')
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Show_database():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie')
+        if con.is_connected():
+            #successfully connected
+            cur=con.cursor()
+            cur.execute('Show databases')
+            for i in cur:
+                print(i)
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Create_table():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        if con.is_connected():
+            #successfully connected
+            cur=con.cursor()
+            cur.execute('''create table emp11(
+                            id int(4) primary key, name varchar(15),
+                            salary float)''')
+            print()
+            print("table created->emp10")
+            print('+------------|---------------|------------+')
+            print('+Column Name | DataType(Size)| NULL       |')
+            print('+------------|---------------|------------+')
+            rec = cur.fetchall ()
+            for i in rec:
+                print(' |{0:12} | {1:12} | {2:10} |'.format(i[0],i[1],i[2]))
+            print('+------------|---------------|------------+')
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Show_table():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        if con.is_connected():
+            #successfully connected
+            cur=con.cursor()
+            cur.execute('show tables')
+            for i in cur:
+                print(i[0])
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Insert_record():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        if con.is_connected():
+            #successfully connected
+            cur=con.cursor()
+            ID= int(input("Enter employee id: "))
+            NAME= input('Enter name of employee: ')
+            SALARY=float (input("enter employee salary: "))
+
+            query1="insert into emp(id,name,salary) values({},'{}',{})".format(ID,NAME,SALARY)
+            cur.execute(query1)
+            con.commit()
+            print(cur.rowcount,'record inserted')
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Update_record():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        if con.is_connected():
+            #successfully connected
+            cur=con.cursor()
+            d=int(input("Enter employee id for update record: "))
+            ID= int(input("Enter employee id: "))
+            NAME= input('Enter name of employee: ')
+            SALARY=float (input("enter employee salary: "))
+            query="update emp set id=%s , name='%s' , salary=%s where id=%s" %(ID,NAME,SALARY,d)
+            cur.execute(query)
+            con.commit()
+            print(cur.rowcount,'record updated')
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Delete_record():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        cur=con.cursor()
+        d=int(input("Enter employee id for deleting record: "))
+        query="delete from emp where id={0}".format(d)
+        cur.execute(query)
+        con.commit()
+        print(cur.rowcount,'record deleted')
+        con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Search_record():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        cur=con.cursor()
+        print('Enter the choice according to you want to search record:')
+        print("1. according to id")
+        print("2. according to name")  
+        print("3. According to salary")
+        print()
+        choice=int(input("Enter the choice(1-3): "))
+        if choice==1:
+            d=int(input("enter employee id which you want to search: "))
+            query="select * from emp where id '%s'" %(d)
+        elif choice==2:
+            name=input("Enter employee name which you want to search: ")
+            query="select * from emp where name LIKE'%s'" %(name)
+        elif choice==3:
+            sal=float (input("enter employee salary which you want to search: "))
+            query="select * from emp where salary=%s" %(sal)
+        else:
+            print("Wrong choice")
+        cur.execute(query)
+        rec=cur.fetchall()
+        count=cur.rowcount
+        print("Total no. of records found:",count)
+        
+        for i in rec:
+            print(i)
+
+        print("record searched")
+        con.close()
+    except driver.Error as err:
+        print('Error :', err)
+def Display_record():
+    try:
+        con=driver.connect(host='localhost',user='root',password='ishoulddie',database='employee')
+        if con.is_connected():
+            # connected successfully
+            cur=con.cursor()
+            cur.execute('select * from emp')
+            rec=cur.fetchall()
+            count=cur.rowcount
+            print(' +----------|--------------|------------+')
+            print(' + empid    | empname      | salary     |')
+            print(' +----------|--------------|------------+')
+            for i in rec:
+                print(' |{0:^9} | {1:12} | {2:10} |'.format(i[0],i[1],i[2]))
+            print(' +----------|--------------|------------+')           
+            print(" + total no. of records are:",count,'         |')           
+            print(' +--------------------------------------+')           
+            # for i in rec:
+            # print(i)
+            con.close()
+    except driver.Error as err:
+        print('Error :', err)
+menu()
+
+
+Output :
+*******
+
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :1
+Error : 1007 (HY000): Can't create database 'employeeee'; database exists
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :2
+('dat',)
+('employ',)
+('employe',)
+('employee',)
+('employeeee',)
+('hallo',)
+('information_schema',)
+('inventory',)
+('medico',)
+('mysql',)
+('pasword',)
+('performance_schema',)
+('purchase',)
+('sakila',)
+('sys',)
+('world',)
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :3
+Error : 1050 (42S01): Table 'emp11' already exists
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :4
+emp
+emp10
+emp11
+emp2
+emp5
+emp6
+empl
+emplo
+practice
+tab
+press ENTER KEY to continue.... 
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :5
+Enter employee id: 1789
+Enter name of employee: Asmita
+enter employee salary: 70000
+1 record inserted
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :6
+Enter employee id for update record: 1789
+Enter employee id: 1789
+Enter name of employee: Asmita
+enter employee salary: 80000
+1 record updated
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :7
+Enter employee id for deleting record: 1789
+1 record deleted
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :8
+Enter the choice according to you want to search record:
+1. according to id
+2. according to name
+3. According to salary
+
+Enter the choice(1-3): 3
+enter employee salary which you want to search: 80000
+Total no. of records found: 2
+(1256, 'Shivpratap', 80000)
+(1567, 'Sneha', 80000)
+record searched
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :9
+ +----------|--------------|------------+
+ + empid    | empname      | salary     |
+ +----------|--------------|------------+
+ |  2456    | Prachi       |      90000 |
+ |  4321    | Soham        |        100 |
+ |  1256    | Shivpratap   |      80000 |
+ |  1234    | Arya         |     500000 |
+ |  1677    | Avantika     |     900000 |
+ |  1892    | Aniket       |     100000 |
+ |  1567    | Vaishali     |     100000 |
+ |  1567    | Sneha        |      80000 |
+ |  2014    | Saie         |      90000 |
+ |  5436    | Kaveri       |      90000 |
+ +----------|--------------|------------+
+ + total no. of records are: 13         |
+ +--------------------------------------+
+press ENTER KEY to continue....
+.....MENU.....
+1. Create Database
+2. Show database
+3. Create table
+4. Show tables
+5. Insert record
+6. Update record
+7. Delete record
+8. Search record
+9. Desplay record
+10. Exit...
+
+
+
+
+
+
+
+
+
+
+enter your choice from 1-10 :10
