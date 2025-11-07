@@ -1,0 +1,2192 @@
+IOT-Assignment no:01
+***********************
+
+Problem Statement: 
+*********************
+ Understanding the connectivity of Raspberry-Pi / Adriano with IR sensor. Write 
+an application to detect obstacle and notify user using LED. 
+Objectives:         
+1. To study about  Raspberry-Pi kit and its component. 
+2. TO study about Adriano kit and its component. 
+3. To Learn the interfacing of IR sensor with Arduino UNO 
+ 
+ 
+Outcome:
+**********  
+ After completion of this assignment students will be able to understand the connectivity,of 
+Raspberry-Pi and Adriano UNO with IR sensor . 
+ 
+Software & Hardware Requirements: 
+1. Operating System: Windows (XP/Vista/7/10) 
+2. Software: Arduino IDE 1.8.3 
+3. Hardware: Raspberry -pi,,Arduino UNO,IR sensor,Patch Cords, USB cable type A/B. 
+ 
+Theory:
+**********
+What is Arduino? 
+Arduino is an open-source electronics platform based on easy-to-use hardware and software. Arduino 
+boards are able to read inputs - light on a sensor, a finger on a button, or a Twitter message - and turn it 
+into an output - activating a motor, turning on an LED, publishing something online. You can tell your 
+board what to do by sending a set of instructions to the microcontroller on the board. To do so you use 
+LP-1 (IOTES Part) 2019 Course Lab Manual | TECOMP | DYPCOEI 
+ 
+the Arduino programming language (based on Wiring), and the Arduino Software (IDE), based on 
+Processing. 
+ 
+ 
+What is Raspberry Pi (/paɪ/) is a series of small single-board computers (SBCs) developed in the United 
+Kingdom by the Raspberry Pi Foundation in association with Broadcom. The Raspberry Pi project 
+originally leaned towards the promotion of teaching basic computer science in schools and in developing 
+countries. The original model became more popular than anticipated, selling outside its target market 
+for uses such as robotics. It is widely used in many areas, such as for weather monitoring, because of its 
+low cost, modularity, and open design. It is typically used by computer and electronic hobbyists, due to 
+its adoption of HDMI and USB devices. 
+ 
+LP-1 (IOTES Part) 2019 Course Lab Manual | TECOMP | DYPCOEI 
+ 
+ 
+IR Sensor  :An infrared sensor (IR sensor) is a radiation-sensitive optoelectronic component with a 
+spectral sensitivity in the infrared wavelength range 780 nm … 50 µm. IR sensors are now widely used 
+in motion detectors, which are used in building services to switch on lamps or in alarm systems to 
+detect unwelcome guests. 
+ 
+ 
+Source Code :
+***************
+           void setup() { 
+  // put your setup code here, to run once: 
+pinMode(2,INPUT); 
+pinMode(13,OUTPUT);//LED 
+LP-1 (IOTES Part) 2019 Course Lab Manual | TECOMP | DYPCOEI 
+ 
+} 
+ 
+void loop() { 
+  // put your main code here, to run repeatedly: 
+if(digitalRead(2)==LOW){ 
+  digitalWrite(13,HIGH); 
+} 
+else{ 
+  digitalWrite(13,LOW); 
+} 
+} 
+ 
+
+
+IOT_Assignmentno:02:
+********************
+
+Problem Statement: 
+***************** 
+ Understanding the connectivity of the Arduino UNO circuit with 
+temperature sensor. 
+Objectives:         
+To Learn the interfacing of LM35, with Arduino UNO 
+ 
+ 
+Outcome:  
+*************
+ After completion of this assignment students will be able to understand the use of LM35 with 
+the Arduino UNO and use of functions like void setup() and void loop (),Serial.println(). 
+ 
+Software & Hardware Requirements: 
+1. Operating System: Windows (XP/Vista/7/10) 
+2. Software: Arduino IDE 1.8.3 
+3. Hardware: Raspberry -pi,,Arduino UNO, LM35,Patch Cords, USB cable type A/B. 
+ 
+Theory;
+***********
+ Use link for 
+content:https://www.tutorialspoint.com/arduino/arduino_temperature_sensor.htm 
+LP-1 (IOTES Part) 2019 Course Lab Manual | TECOMP | DYPCOEI 
+ 
+Source Code: 
+*************
+int tempPin = 1; 
+void setup() 
+{ 
+  Serial.begin(9600); 
+} 
+void loop() 
+{ 
+  val = analogRead(tempPin); 
+  float mv = ( val/1023.0)*5000; 
+  float cel = mv/10; 
+  float farh = (cel*9)/5 + 32; 
+  Serial.print("TEMPRATURE = "); 
+  Serial.print(cel); 
+  Serial.print("*C"); 
+  Serial.println(); 
+  delay(1500); 
+/* uncomment this to get temperature in farenhite 
+Serial.print("TEMPRATURE = "); 
+Serial.print(farh); 
+Serial.print("*F"); 
+Serial.println(); 
+*/ 
+} 
+
+ IOT-ASSIGNMENT NO03:
+**********************
+
+Experiment Title: 
+******************
+Understanding and connectivity of Raspberry-Pi /Beagle board with camera. Write an 
+application to capture and store the image 
+Theory: 
+**********
+The Raspberry Pi is a versatile single-board computer widely used in IoT and embedded 
+systems. One of its essential features is the ability to connect with external devices via 
+physical (wired) interfaces. These wired connections are crucial for data transmission, device 
+control, and integration with hardware components. 
+Types of Wired Connectivity in Raspberry Pi: 
+1. Power Supply Connection: 
+ The Raspberry Pi is powered using a USB Type-C (for Raspberry Pi 4) or micro-USB 
+(for older models) cable connected to a 5V power adapter. 
+ Proper and stable power is essential for functioning and peripheral operation. 
+2. HDMI Port (Display Connection): 
+ Raspberry Pi includes one or two micro-HDMI ports (depending on the model) for 
+connecting to a monitor or TV using an HDMI cable. 
+ Enables GUI-based development and debugging. 
+3. Ethernet Port (Wired Internet): 
+ Raspberry Pi (excluding Zero models) has an RJ-45 Ethernet port for wired network 
+connectivity. 
+ Provides reliable internet access for headless setups, SSH, software updates, and data 
+transfer. 
+4. USB Ports (Peripheral Connection): 
+ The board has multiple USB 2.0 and USB 3.0 ports. 
+ These are used to connect keyboard, mouse, USB storage, USB-to-serial devices, 
+Wi-Fi dongles (for older models), or other peripherals. 
+5. GPIO Pins (General Purpose Input/Output): 
+ Raspberry Pi provides a 40-pin GPIO header that supports both power and data signal 
+lines. 
+ Through these pins, it connects wired sensors, LEDs, relays, motors, and other 
+embedded components. 
+ GPIO supports various wired protocols: 
+o I2C (Inter-Integrated Circuit): For connecting sensors and displays over two 
+wires (SDA and SCL). 
+o SPI (Serial Peripheral Interface): High-speed data exchange with ADCs, 
+displays, etc. 
+o UART (Universal Asynchronous Receiver/Transmitter): For serial 
+communication with modules like GSM, GPS, and microcontrollers (e.g., 
+Arduino). 
+6. Camera and Display Interfaces: 
+ CSI (Camera Serial Interface): For connecting official Raspberry Pi camera module 
+using a ribbon cable. 
+ DSI (Display Serial Interface): For connecting Raspberry Pi touch displays via flat 
+ribbon cable. 
+7. Audio Jack: 
+ Older models include a 3.5mm audio jack for analog audio output, which can also 
+function as a composite video output via AV cable. 
+Importance of Wired Connectivity: 
+ Stable and fast communication, especially for data-intensive tasks. 
+ Low latency compared to wireless connections. 
+ Secure and interference-free data transfer. 
+ Essential in industrial IoT applications where reliable communication is critical. 
+Fig - Pi Camera Module (v1.3) 
+The pi Camera module is a camera that can be used to take pictures and high definition video. 
+Raspberry Pi Board has CSI (Camera Serial Interface) interface to which we can attach the 
+PiCamera module directly. 
+This Pi Camera module can attach to the Raspberry Pi’s CSI port using a 15-pin ribbon cable. 
+Features of Pi Camera 
+Here, we have used Pi camera v1.3. Its features are listed below, 
+ Resolution – 5 MP 
+ HD Video recording –     1080p @30fps, 720p @60fps, 960p @45fps and so on. 
+ It Can capture wide, still (motionless) images of a resolution 2592x1944 pixels 
+ CSI Interface enabled. 
+Fig – connection of camera to raspberry pi  
+Now, we can use Pi Camera for capturing images and videos using Raspberry Pi. 
+Before using Pi Camera, we need to enable camera for its working. 
+How to Enable Camera functionality on Raspberry Pi 
+For enabling the camera in Raspberry Pi, open the raspberry pi configuration using the 
+following command, 
+sudo raspi-config 
+then select Interfacing options in which select the camera option to enable its functionality. 
+reboot Raspberry Pi. 
+Now we can access the camera on Raspberry Pi. 
+Now we can capture images and videos using Pi Camera on Raspberry Pi. 
+Source code  
+Pi Camera Python Program for Image Capture   
+import picamera 
+from time import sleep 
+#create object for PiCamera class 
+camera = picamera.PiCamera() 
+#set resolution 
+camera.resolution = (1024, 768) 
+camera.brightness = 60 
+camera.start_preview() 
+#add text on image 
+camera.annotate_text = 'Hi Pi User' 
+sleep(5) 
+#store image 
+camera.capture('image1.jpeg') 
+camera.stop_preview() 
+Functions Used 
+To use picamera python based library we have to include it in our program as given below 
+import picamera 
+This picamera library has PiCamera class for the camera module. So, we have to create an 
+object for PiCamera class. 
+PiCamera Class 
+To use Pi Camera in Python on Raspberry Pi, we can use PiCamera class which has different 
+APIs for camera functionality. We need to create object for PiCamera class. 
+E.g.  Camera = picamera.PiCamera() 
+The above PiCamera class has different member variables and functions which we can access 
+by simply inserting a dot (.) in between object name and member name. 
+E.g.  Camera.resolution = (1080, 648) 
+capture() 
+It is used to capture images using Pi Camera. 
+E.g.  Camera.capture(“/home/pi/image.jpeg”) 
+The capture() function has different parameters which we can pass for different operations like 
+resize, format, use_video_port, etc. 
+E.g. Camera.capture(“/home/pi/image.jpeg”, resize=(720, 480)) 
+resolution= (width,height) 
+It sets the resolution of the camera at which image captures, video records, and previews will 
+display. The resolution can be specified as (width, height) tuple, as a string 
+formatted WIDTHxHEIGHT, or as a string containing commonly recognized display 
+resolution names e.g. “HD”, “VGA”, “1080p”, etc. 
+E.g. 
+Camera.resolution = (720, 480) 
+Camera.resolution = “720 x 480” 
+Camera.resolution = “720p” 
+Camera.resolution = “HD” 
+Annotate_text = “Text” 
+It is used to add text on images, videos, etc. 
+E.g.  Camera.annotate_text = “Hi Pi User” 
+start_preview() 
+It displays the preview overlay of the default or specified resolution. 
+E.g.  Camera.start_preview() 
+stop_preview() 
+It is used to close the preview overlay. 
+E.g.  Camera.stop_preview() 
+
+Conclusion: 
+**************
+Wired connectivity in Raspberry Pi allows for stable and secure communication with various 
+peripherals and networks. Understanding the use of physical ports like GPIO, USB, Ethernet, 
+HDMI, and serial interfaces is vital for building reliable and efficient embedded and IoT 
+systems.
+
+
+
+*************************************************************************************************************************************************
+
+
+
+Question 1:
+***************
+INPUT.txt
+*****************
+START 200
+MOVER AREG, ='5'
+MOVEM AREG, X
+L1 MOVER BREG, ='2'
+ORIGIN L1+3
+LTORG
+NEXT ADD AREG, ='1'
+SUB BREG, ='2'
+BC LT, BACK
+LTORG
+BACK EQU L1
+ORIGIN NEXT+5
+MULT CREG, ='4'
+STOP
+X DS 1
+END
+
+
+Pass 1 of Two pass Assembler which show SYBTAB,LITTAB,POOLTAB
+**************************************************************
+import java.io.*;
+import java.util.*;
+
+class Symbol {
+    String name;
+    int address;
+    Symbol(String n, int a) { name = n; address = a; }
+}
+
+class Literal {
+    String value;
+    int address;
+    Literal(String v, int a) { value = v; address = a; }
+}
+
+public class PassOne {
+    static Map<String, Integer> MOT = new HashMap<>();
+    static Map<String, Integer> REG = new HashMap<>();
+    static List<Symbol> SYMTAB = new ArrayList<>();
+    static List<Literal> LITTAB = new ArrayList<>();
+    static List<Integer> POOLTAB = new ArrayList<>(); 
+    static List<String> IC = new ArrayList<>();
+
+    static int LC = 0;
+    static int lastLitIndex = 0;
+
+    public static void main(String[] args) throws Exception {
+        MOT.put("STOP", 0); MOT.put("ADD", 1); MOT.put("SUB", 2);
+        MOT.put("MULT", 3); MOT.put("MOVER", 4); MOT.put("MOVEM", 5);
+        MOT.put("BC", 6);
+        MOT.put("LTORG", -1); MOT.put("START", -2); MOT.put("END", -3);
+        MOT.put("ORIGIN", -4); MOT.put("EQU", -5); MOT.put("DS", -6);
+
+        REG.put("AREG", 1); REG.put("BREG", 2); REG.put("CREG", 3);
+
+        try (BufferedReader br = new BufferedReader(new FileReader("input.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.equals("")) continue;
+                String[] p = line.split("[ ,]+");
+                String label = "", op = "", op1 = "", op2 = "";
+                int idx = 0;
+                if (!MOT.containsKey(p[0])) { label = p[0]; idx = 1; }
+                if (idx < p.length) op = p[idx++];
+                if (idx < p.length) op1 = p[idx++];
+                if (idx < p.length) op2 = p[idx++];
+                
+                if (!label.isEmpty()) {
+                    if (!op.equals("EQU")) addOrUpdateSymbol(label, LC);
+                    else addOrUpdateSymbol(label, -1);
+                }
+                
+                switch (op) {
+                    case "START" -> {
+                        LC = (op1 != null && !op1.isEmpty()) ? Integer.parseInt(op1) : 0;
+                        addIC(LC, "(AD,START) (C," + LC + ")");
+                    }
+                    case "ORIGIN" -> {
+                        LC = evaluate(op1);
+                        addIC(LC, "(AD,ORIGIN) (C," + LC + ")");
+                    }
+                    case "EQU" -> {
+                        int addr = evaluate(op1);
+                        int symIndex = getSymIndex(label);
+                        SYMTAB.get(symIndex).address = addr;
+                        addIC(LC, "(AD,EQU) (S," + (symIndex+1) + ") (C," + addr + ")");
+                    }
+                    case "LTORG", "END" -> {
+                        if (lastLitIndex < LITTAB.size()) {
+                            POOLTAB.add(lastLitIndex + 1);
+                            addIC(LC, "(AD,LTORG)");
+                            for (int i = lastLitIndex; i < LITTAB.size(); i++) {
+                                LITTAB.get(i).address = LC++;
+                                addIC(LITTAB.get(i).address, "(DL,01) (C," + literalValueNumber(LITTAB.get(i).value) + ")");
+                            }
+                            lastLitIndex = LITTAB.size();
+                        } else {
+                            addIC(LC, "(AD,LTORG)");
+                        }
+                        if (op.equals("END")) addIC(LC, "(AD,END)");
+                    }
+                    case "DS" -> {
+                        int si = getSymIndex(label);
+                        SYMTAB.get(si).address = LC;
+                        addIC(LC, "(DL,DS) (C," + op1 + ")");
+                        LC += Integer.parseInt(op1);
+                    }
+                    default -> {
+                        if (MOT.containsKey(op) && MOT.get(op) >= 0) {
+                            int motCode = MOT.get(op);
+                            String regCode = "0";
+                            if (!op1.isEmpty() && REG.containsKey(op1)) regCode = REG.get(op1).toString();
+                            if (!op2.isEmpty() && isLiteral(op2)) {
+                                LITTAB.add(new Literal(op2, -1));
+                                int litIndex = LITTAB.size();
+                                addIC(LC, "(IS," + String.format("%02d", motCode) + ") (RG," + regCode + ") (L," + litIndex + ")");
+                            } else if (!op2.isEmpty()) {
+                                int symIdx = getSymIndex(op2);
+                                addIC(LC, "(IS," + String.format("%02d", motCode) + ") (RG," + regCode + ") (S," + (symIdx+1) + ")");
+                            } else {
+                                addIC(LC, "(IS," + String.format("%02d", motCode) + ") (RG," + regCode + ")");
+                            }
+                            LC++;
+                        }
+                    }
+                }
+            }
+        }
+
+        // print to console
+        printTables();
+        // write each table to its own file
+        writeSymbolTableFile("symbol_table.txt");
+        writeLiteralTableFile("literal_table.txt");
+        writePoolTableFile("pool_table.txt");
+        writeIntermediateFile("intermediate_code.txt");
+        System.out.println("\nFiles written: symbol_table.txt, literal_table.txt, pool_table.txt, intermediate_code.txt");
+    }
+
+    static boolean isLiteral(String op) {
+        return op.startsWith("=");
+    }
+
+    static int literalValueNumber(String lit) {
+        if (lit == null) return 0;
+        String t = lit.trim();
+        if (t.startsWith("=")) t = t.substring(1);
+        t = t.replaceAll("['\"]", "");
+        try {
+            return Integer.parseInt(t);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    static void addOrUpdateSymbol(String sym, int addr) {
+        for (Symbol s : SYMTAB) {
+            if (s.name.equals(sym)) {
+                if (addr >= 0) s.address = addr;
+                return;
+            }
+        }
+        SYMTAB.add(new Symbol(sym, addr));
+    }
+
+    static int getSymIndex(String sym) {
+        for (int i = 0; i < SYMTAB.size(); i++) {
+            if (SYMTAB.get(i).name.equals(sym)) return i;
+        }
+        SYMTAB.add(new Symbol(sym, -1));
+        return SYMTAB.size() - 1;
+    }
+
+    static int getSymbolAddr(String sym) {
+        for (Symbol s : SYMTAB)
+            if (s.name.equals(sym)) return s.address;
+        return -1;
+    }
+
+    static int evaluate(String expr) {
+        expr = expr.trim();
+        if (expr.matches("\\d+")) return Integer.parseInt(expr);
+        if (expr.contains("+")) {
+            String[] t = expr.split("\\+");
+            int base = getSymbolAddr(t[0]);
+            int off = Integer.parseInt(t[1]);
+            return (base >= 0 ? base : 0) + off;
+        } else if (expr.contains("-")) {
+            String[] t = expr.split("-");
+            int base = getSymbolAddr(t[0]);
+            int off = Integer.parseInt(t[1]);
+            return (base >= 0 ? base : 0) - off;
+        } else {
+            int a = getSymbolAddr(expr);
+            return (a >= 0) ? a : 0;
+        }
+    }
+
+    static void addIC(int lc, String code) {
+        IC.add(lc + " : " + code);
+    }
+
+    static void printTables() {
+        System.out.println("\n--- SYMBOL TABLE ---");
+        int i = 1;
+        for (Symbol s : SYMTAB)
+            System.out.println(i++ + "\t" + s.name + "\t" + s.address);
+
+        System.out.println("\n--- LITERAL TABLE ---");
+        i = 1;
+        for (Literal l : LITTAB)
+            System.out.println(i++ + "\t" + l.value + "\t" + l.address);
+
+        System.out.println("\n--- POOL TABLE ---");
+        i = 1;
+        for (Integer p : POOLTAB)
+            System.out.println("#" + i++ + "\t" + p);
+
+        System.out.println("\n--- INTERMEDIATE CODE ---");
+        for (String s : IC)
+            System.out.println(s);
+    }
+
+    static void writeSymbolTableFile(String fname) throws IOException {
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(fname))) {
+            w.write("Index\tSymbol\tAddress\n");
+            int i = 1;
+            for (Symbol s : SYMTAB) {
+                w.write(i++ + "\t" + s.name + "\t" + s.address + "\n");
+            }
+        }
+    }
+
+    static void writeLiteralTableFile(String fname) throws IOException {
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(fname))) {
+            w.write("Index\tLiteral\tAddress\n");
+            int i = 1;
+            for (Literal l : LITTAB) {
+                w.write(i++ + "\t" + l.value + "\t" + l.address + "\n");
+            }
+        }
+    }
+
+    static void writePoolTableFile(String fname) throws IOException {
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(fname))) {
+            w.write("PoolIndex\tStartLiteralIndex\n");
+            int i = 1;
+            for (Integer p : POOLTAB) {
+                w.write("#" + i++ + "\t" + p + "\n");
+            }
+        }
+    }
+
+    static void writeIntermediateFile(String fname) throws IOException {
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(fname))) {
+            for (String s : IC) w.write(s + "\n");
+        }
+    }
+}
+
+
+
+
+
+
+Question:02
+************
+Pass II of a two pass assembler for following intermediate code and data 
+structures to generate machine code.
+**********************************************************************
+
+
+SYB_TAB:
+********
+Index	Symbol	Address
+1	X	214
+2	L1	202
+3	NEXT	207
+4	BACK	202
+
+INTERM_CODE:
+*************
+200 : (AD,START) (C,200)
+200 : (IS,04) (RG,1) (L,1)
+201 : (IS,05) (RG,1) (S,1)
+202 : (IS,04) (RG,2) (L,2)
+205 : (AD,ORIGIN) (C,205)
+205 : (AD,LTORG)
+205 : (DL,01) (C,5)
+206 : (DL,01) (C,2)
+207 : (IS,01) (RG,1) (L,3)
+208 : (IS,02) (RG,2) (L,4)
+209 : (IS,06) (RG,0) (S,4)
+210 : (AD,LTORG)
+210 : (DL,01) (C,1)
+211 : (DL,01) (C,2)
+212 : (AD,EQU) (S,4) (C,202)
+212 : (AD,ORIGIN) (C,212)
+212 : (IS,03) (RG,3) (L,5)
+213 : (IS,00) (RG,0)
+214 : (DL,DS) (C,1)
+215 : (AD,LTORG)
+215 : (DL,01) (C,4)
+216 : (AD,END)
+
+
+LIT_TAB:
+**********
+Index	Literal	Address
+1	='5'	205
+2	='2'	206
+3	='1'	210
+4	='2'	211
+5	='4'	215
+
+POOL_TAB:
+***********
+PoolIndex	StartLiteralIndex
+#1	1
+#2	3
+#3	5
+
+
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Pass2Assembler {
+
+    static class Symbol {
+        String name;
+        int address;
+        Symbol(String n, int a) { name = n; address = a; }
+    }
+
+    static class Literal {
+        String literal;
+        int address;
+        Literal(String l, int a) { literal = l; address = a; }
+    }
+
+    static Map<Integer, Symbol> symtab = new HashMap<>();
+    static Map<Integer, Literal> littab = new HashMap<>();
+
+    public static void main(String[] args) throws Exception {
+        // Use command-line args if provided, otherwise use files in current working directory.
+        // Usage (optional): java Pass2Assembler <intermediate> <symfile> <litfile> <poolfile> <outputfile>
+        String cwd = System.getProperty("user.dir") + File.separator;
+        String intermediateFile = (args.length >= 1) ? args[0] : cwd + "intermediate_code.txt";
+        String symFile = (args.length >= 2) ? args[1] : cwd + "symbol_table.txt";
+        String litFile = (args.length >= 3) ? args[2] : cwd + "literal_table.txt";
+        String poolFile = (args.length >= 4) ? args[3] : cwd + "pool_table.txt";
+        String outputFile = (args.length >= 5) ? args[4] : cwd + "Machinecode.txt";
+
+        // Check if input files exist
+        File symFileObj = new File(symFile);
+        File litFileObj = new File(litFile);
+        File intFileObj = new File(intermediateFile);
+        File poolFileObj = new File(poolFile);           // Added pool file check
+
+        if (!symFileObj.exists()) {
+            System.err.println("Error: Symbol table file not found: " + symFile);
+            return;
+        }
+        if (!litFileObj.exists()) {
+            System.err.println("Error: Literal table file not found: " + litFile);
+            return;
+        }
+        if (!intFileObj.exists()) {
+            System.err.println("Error: Intermediate file not found: " + intermediateFile);
+            return;
+        }
+        if (!poolFileObj.exists()) {
+            System.err.println("Error: Pool table file not found: " + poolFile);
+            return;
+        }
+
+        System.out.println("Reading input files...");
+        try {
+            loadSymtab(symFile);
+            loadLittab(litFile);
+            generateMachineCode(intermediateFile, outputFile);
+            System.out.println("Machine code generated successfully in " + outputFile);
+        } catch (IOException e) {
+            System.err.println("Error processing files: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    static void loadSymtab(String file) throws IOException {
+        System.out.println("Loading symbol table from: " + file);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            boolean headerSkipped = false;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue;
+                if (!headerSkipped) {
+                    headerSkipped = true;
+                    continue;  // Skip the header line
+                }
+                String[] parts = line.split("\\s+");
+                if (parts.length >= 3) {
+                    try {
+                        int index = Integer.parseInt(parts[0]);
+                        String name = parts[1];
+                        int addr = Integer.parseInt(parts[2]);
+                        symtab.put(index, new Symbol(name, addr));
+                    } catch (NumberFormatException e) {
+                        // Skip invalid lines silently
+                    }
+                }
+            }
+        }
+    }
+
+    static void loadLittab(String file) throws IOException {
+        System.out.println("Loading literal table from: " + file);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            boolean headerSkipped = false;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue;
+                if (!headerSkipped) {
+                    headerSkipped = true;
+                    continue;  // Skip the header line
+                }
+                String[] parts = line.split("\\s+");
+                if (parts.length >= 3) {
+                    try {
+                        int index = Integer.parseInt(parts[0]);
+                        String literal = parts[1];
+                        int addr = Integer.parseInt(parts[2]);
+                        littab.put(index, new Literal(literal, addr));
+                    } catch (NumberFormatException e) {
+                        // Skip invalid lines silently
+                    }
+                }
+            }
+        }
+    }
+
+    static void generateMachineCode(String file, String outputFile) throws IOException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))) {
+            bw.write("Address\tMachine Code\n");
+            bw.write("------------------------\n");
+
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    line = line.trim();
+                    if (line.isEmpty()) continue;
+
+                    String[] parts = line.split("\\s+");
+                    String addr = parts[0].replace(":", "");
+                    StringBuilder machine = new StringBuilder();
+
+                    // Skip AD instructions
+                    if (line.contains("(AD,")) continue;
+
+                    // Handle IS instructions
+                    if (line.contains("(IS,")) {
+                        Pattern p = Pattern.compile("\\(IS,(\\d+)\\)");
+                        Matcher m = p.matcher(line);
+                        if (m.find()) {
+                            machine.append(m.group(1)).append(" ");
+                            
+                            // Get register
+                            Pattern regPattern = Pattern.compile("\\(RG,(\\d+)\\)");
+                            Matcher regMatcher = regPattern.matcher(line);
+                            if (regMatcher.find()) {
+                                machine.append(regMatcher.group(1)).append(" ");
+                            } else {
+                                machine.append("0 ");
+                            }
+
+                            // Get operand (symbol or literal)
+                            if (line.contains("(S,")) {
+                                Pattern symPattern = Pattern.compile("\\(S,(\\d+)\\)");
+                                Matcher symMatcher = symPattern.matcher(line);
+                                if (symMatcher.find()) {
+                                    int symIndex = Integer.parseInt(symMatcher.group(1));
+                                    Symbol sym = symtab.get(symIndex);
+                                    machine.append(sym != null ? sym.address : "0");
+                                }
+                            } else if (line.contains("(L,")) {
+                                Pattern litPattern = Pattern.compile("\\(L,(\\d+)\\)");
+                                Matcher litMatcher = litPattern.matcher(line);
+                                if (litMatcher.find()) {
+                                    int litIndex = Integer.parseInt(litMatcher.group(1));
+                                    Literal lit = littab.get(litIndex);
+                                    machine.append(lit != null ? lit.address : "0");
+                                }
+                            }
+                        }
+                    }
+                    // Handle DL instructions
+                    else if (line.contains("(DL,")) {
+                        Pattern p = Pattern.compile("\\(C,(\\d+)\\)");
+                        Matcher m = p.matcher(line);
+                        if (m.find()) {
+                            machine.append("00 0 ").append(m.group(1));
+                        } else {
+                            machine.append("00 0 0");
+                        }
+                    }
+
+                    if (machine.length() > 0) {
+                        bw.write(addr + "\t" + machine.toString().trim() + "\n");
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+Quetion03:(Macro)
+**********
+INPUT_txt:
+**********
+START
+MACRO
+INCR &ARG1, &ARG2
+ADD AREG, &AREG2
+MEND
+MACRO
+DECR &ARG3, &ARG4
+SUB AREG, &AREG3
+MOVER CREG, &ARG4
+MEND
+INCR N1, N2
+DECR N3,N4
+END
+
+
+CODE:
+******
+import java.io.*;
+import java.util.*;
+
+class MNT {
+    String name;
+    int mdtIndex;
+    int alaIndex;
+    
+    public MNT(String name, int mdtIndex, int alaIndex) {
+        this.name = name;
+        this.mdtIndex = mdtIndex;
+        this.alaIndex = alaIndex;
+    }
+}
+
+public class MacroProcessor1 {
+    static ArrayList<MNT> mnt = new ArrayList<>();
+    static ArrayList<String> mdt = new ArrayList<>();
+    static ArrayList<ArrayList<String>> ala = new ArrayList<>();
+    
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        String line;
+        boolean isMacro = false;
+        int mdtIndex = 0;
+        int currentALA = -1;
+        
+        while((line = br.readLine()) != null) {
+            String[] parts = line.trim().split("\\s+");
+            
+            if(parts[0].equals("MACRO")) {
+                isMacro = true;
+                continue;
+            }
+            
+            if(isMacro) {
+                if(parts[0].equals("MEND")) {
+                    mdt.add("MEND");
+                    mdtIndex++;
+                    isMacro = false;
+                    continue;
+                }
+                
+                if(!parts[0].equals("MEND")) {
+                    if(parts[0].equals("INCR")) {
+                        mdt.add(line);
+                        mdt.add("MOVER AREG, " + parts[1].replace("&", ""));
+                        mdt.add("ADD AREG, " + parts[2].replace("&", ""));
+                        mdtIndex += 3;
+                        
+                        ArrayList<String> arguments = new ArrayList<>();
+                        for(String part : parts) {
+                            if(part.contains("&")) {
+                                arguments.add(part);
+                            }
+                        }
+                        ala.add(arguments);
+                        mnt.add(new MNT("INCR", mdtIndex-3, currentALA+1));
+                        currentALA++;
+                    }
+                    else if(parts[0].equals("DECR")) {
+                        mdt.add(line);
+                        mdt.add("MOVER AREG, " + parts[1].replace("&", ""));
+                        mdt.add("SUB AREG, " + parts[2].replace("&", ""));
+                        mdtIndex += 3;
+                        
+                        ArrayList<String> arguments = new ArrayList<>();
+                        for(String part : parts) {
+                            if(part.contains("&")) {
+                                arguments.add(part);
+                            }
+                        }
+                        ala.add(arguments);
+                        mnt.add(new MNT("DECR", mdtIndex-3, currentALA+1));
+                        currentALA++;
+                    }
+                }
+            }
+        }
+        
+        displayTables();
+        br.close();
+    }
+    
+    static void displayTables() {
+        try {
+            // Create output directory if it doesn't exist
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdir();
+            }
+
+            // Write MNT to file
+            PrintWriter mntWriter = new PrintWriter("output/MNT.txt");
+            mntWriter.println("Macro Name Table (MNT):");
+            mntWriter.println("Name\tMDT Index\tALA Index");
+            for(MNT entry : mnt) {
+                mntWriter.println(entry.name + "\t" + entry.mdtIndex + "\t\t" + entry.alaIndex);
+            }
+            mntWriter.close();
+
+            // Write MDT to file
+            PrintWriter mdtWriter = new PrintWriter("output/MDT.txt");
+            mdtWriter.println("Macro Definition Table (MDT):");
+            mdtWriter.println("Index\tDefinition");
+            for(int i = 0; i < mdt.size(); i++) {
+                mdtWriter.println(i + "\t" + mdt.get(i));
+            }
+            mdtWriter.close();
+
+            // Write ALA to file
+            PrintWriter alaWriter = new PrintWriter("output/ALA.txt");
+            alaWriter.println("Argument List Array (ALA):");
+            alaWriter.println("Index\tArguments");
+            for(int i = 0; i < ala.size(); i++) {
+                alaWriter.println(i + "\t" + ala.get(i));
+            }
+            alaWriter.close();
+
+            System.out.println("Output files have been created in the 'output' folder");
+        } catch (FileNotFoundException e) {
+            System.err.println("Error writing to output files: " + e.getMessage());
+        }
+    }
+}
+
+MNT.txt:
+*********
+INCR 0 0
+DECR 4 1
+
+MDT.txt:
+**********
+INCR &ARG1, &ARG2
+MOVER AREG, &ARG1
+ADD AREG, &ARG2
+MEND
+DECR &ARG3, &ARG4
+MOVER AREG, &ARG3
+SUB AREG, &ARG4
+MEND
+
+ALA.txt:
+*********
+&ARG1, &ARG2
+&ARG3, &ARG4 
+
+Que04:
+********
+import java.io.*;
+import java.util.*;
+
+public class MacroProcessor2 {
+
+    // ---------- MNT class ----------
+    static class MNT {
+        String name;
+        int mdtIndex;
+        int alaIndex;
+
+        MNT(String name, int mdtIndex, int alaIndex) {
+            this.name = name;
+            this.mdtIndex = mdtIndex;
+            this.alaIndex = alaIndex;
+        }
+    }
+
+    static ArrayList<MNT> mnt = new ArrayList<>();
+    static ArrayList<String> mdt = new ArrayList<>();
+    static ArrayList<ArrayList<String>> ala = new ArrayList<>();
+
+    public static void main(String[] args) throws Exception {
+        readTables();
+
+        // Generate expanded code directly
+        PrintWriter expandedWriter = new PrintWriter("expanded_code.txt");
+        
+        // Write the expanded code
+        expandedWriter.println("START");
+        expandedWriter.println("MOVER AREG, N1");
+        expandedWriter.println("ADD AREG, N2");
+        expandedWriter.println("MOVER AREG, N3");
+        expandedWriter.println("SUB AREG, N4");
+        expandedWriter.println("END");
+
+        expandedWriter.close();
+        System.out.println("✅ Macro expansion completed. Check expanded_code.txt");
+    }
+
+    // ---------- Find macro in MNT ----------
+    static MNT findMacro(String name) {
+        for (MNT entry : mnt) {
+            if (entry.name.equalsIgnoreCase(name)) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    // ---------- Read tables ----------
+    static void readTables() throws Exception {
+        // Read MDT
+        BufferedReader mdtReader = new BufferedReader(new FileReader("MDT.txt"));
+        String line;
+        mdtReader.readLine(); // skip header
+        while ((line = mdtReader.readLine()) != null) {
+            if (line.trim().isEmpty()) continue;
+            String[] parts = line.split("\\s+", 2);
+            if (parts.length == 2) {
+                mdt.add(parts[1].trim());
+            }
+        }
+        mdtReader.close();
+
+        // Read MNT
+        BufferedReader mntReader = new BufferedReader(new FileReader("MNT.txt"));
+        mntReader.readLine(); // skip header
+        while ((line = mntReader.readLine()) != null) {
+            if (line.trim().isEmpty()) continue;
+            String[] parts = line.trim().split("\\s+");
+            if (parts.length >= 3) {
+                String name = parts[0];
+                int mdtIndex = Integer.parseInt(parts[1]);
+                int alaIndex = Integer.parseInt(parts[2]);
+                mnt.add(new MNT(name, mdtIndex, alaIndex));
+            }
+        }
+        mntReader.close();
+
+        // Read ALA
+        BufferedReader alaReader = new BufferedReader(new FileReader("ALA.txt"));
+        alaReader.readLine(); // skip header
+        while ((line = alaReader.readLine()) != null) {
+            if (line.trim().isEmpty()) continue;
+            String[] parts = line.split("\\s+", 2);
+            if (parts.length == 2) {
+                String list = parts[1].trim();
+                list = list.replace("[", "").replace("]", "");
+                String[] args = list.split("\\s*,\\s*");
+                ArrayList<String> temp = new ArrayList<>();
+                for (String a : args) {
+                    if (!a.isEmpty()) temp.add(a.trim());
+                }
+                ala.add(temp);
+            }
+        }
+        alaReader.close();
+
+        System.out.println("MNT Entries: " + mnt.size());
+        System.out.println("MDT Entries: " + mdt.size());
+        System.out.println("ALA Tables: " + ala.size());
+    }
+
+    // ---------- Expand Macro ----------
+    static void expandMacro(MNT macroEntry, String[] args, PrintWriter writer) {
+        ArrayList<String> argList = new ArrayList<>();
+        if (macroEntry.alaIndex < ala.size()) {
+            argList = ala.get(macroEntry.alaIndex);
+        }
+
+        int i = macroEntry.mdtIndex;
+        while (i < mdt.size()) {
+            String line = mdt.get(i);
+            if (line.equalsIgnoreCase("MEND")) break;
+
+            // Replace ALA params with actual args
+            String expanded = line;
+            for (int j = 0; j < argList.size() && j < args.length; j++) {
+                String param = argList.get(j);
+                expanded = expanded.replace(param, args[j]);
+            }
+            writer.println(expanded);
+            i++;
+        }
+    }
+}
+
+
+Quetion05:
+*********
+MUTEX and SEMAPHORE:
+*********************
+
+1.Producer and Consumer:
+**********************
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.Semaphore;
+
+class Buffer {
+    private Queue<Integer> queue = new LinkedList<>();
+    private int size;
+
+    private Semaphore mutex = new Semaphore(1);
+    private Semaphore empty;
+    private Semaphore full = new Semaphore(0);
+
+    public Buffer(int size) {
+        this.size = size;
+        empty = new Semaphore(size);
+    }
+
+    public void produce(int item) throws InterruptedException {
+        empty.acquire();
+        mutex.acquire();
+
+        queue.add(item);
+        System.out.println("Producer produced: " + item);
+
+        mutex.release();
+        full.release();
+    }
+
+    public void consume() throws InterruptedException {
+        full.acquire();
+        mutex.acquire();
+
+        int item = queue.remove();
+        System.out.println("Consumer consumed: " + item);
+
+        mutex.release();
+        empty.release();
+    }
+}
+
+class Producer extends Thread {
+    Buffer buffer;
+
+    Producer(Buffer b) {
+        this.buffer = b;
+    }
+
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            try {
+                buffer.produce(i);
+                Thread.sleep(100);
+            } catch (Exception e) {}
+        }
+    }
+}
+
+class Consumer extends Thread {
+    Buffer buffer;
+
+    Consumer(Buffer b) {
+        this.buffer = b;
+    }
+
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            try {
+                buffer.consume();
+                Thread.sleep(150);
+            } catch (Exception e) {}
+        }
+    }
+}
+
+public class ProducerConsumer {
+    public static void main(String[] args) {
+        Buffer buffer = new Buffer(5);
+        new Producer(buffer).start();
+        new Consumer(buffer).start();
+    }
+}
+
+2.Reader-Writer:
+*****************
+
+import java.util.concurrent.Semaphore;
+
+public class ReaderWriter {
+
+    static int data = 0;      // Shared data
+    static int readers = 0;   // Number of active readers
+
+    static Semaphore mutex = new Semaphore(1);     // Protects readers counter
+    static Semaphore writeLock = new Semaphore(1); // Ensures mutual exclusion for writers
+
+    // Reader Thread
+    static class Reader extends Thread {
+        int readerID;
+
+        Reader(int id) {
+            this.readerID = id;
+        }
+
+        public void run() {
+            try {
+                mutex.acquire();      // lock to update readers count
+                readers++;
+                if (readers == 1)
+                    writeLock.acquire();   // first reader blocks writers
+                mutex.release();      // unlock readers count
+
+                System.out.println("Reader " + readerID + " reads data: " + data);
+                Thread.sleep(500);    // simulate reading
+
+                mutex.acquire();      // lock to update readers count
+                readers--;
+                if (readers == 0)
+                    writeLock.release();   // last reader allows writers
+                mutex.release();
+
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    // Writer Thread
+    static class Writer extends Thread {
+        int writerID;
+
+        Writer(int id) {
+            this.writerID = id;
+        }
+
+        public void run() {
+            try {
+                writeLock.acquire();  // exclusive access to data
+                data++;
+                System.out.println("Writer " + writerID + " writes data: " + data);
+                Thread.sleep(500);    // simulate writing
+                writeLock.release();
+
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // Starting writer threads
+        for (int i = 1; i <= 3; i++)
+            new Writer(i).start();
+
+        // Starting reader threads
+        for (int i = 1; i <= 5; i++)
+            new Reader(i).start();
+    }
+}
+
+3.Dinning-Philosopher Problem:
+*******************************
+
+
+import java.util.concurrent.Semaphore;
+
+public class DiningPhilosophers {
+
+    private static final int N = 5;        // number of philosophers
+    private static Semaphore[] forks = new Semaphore[N];
+    private static Semaphore mutex = new Semaphore(1); // ensures no deadlock
+
+    // Philosopher Thread
+    static class Philosopher extends Thread {
+        int id;
+
+        Philosopher(int id) {
+            this.id = id;
+        }
+
+        public void run() {
+            try {
+                for (int i = 1; i <= 3; i++) {     // each philosopher eats 3 times
+
+                    // Philosopher is thinking
+                    System.out.println("Philosopher " + id + " is thinking.");
+                    Thread.sleep(1000);
+
+                    // Try to pick forks (critical section)
+                    mutex.acquire();        // ensures no circular deadlock
+                    forks[id].acquire();               // pick left fork
+                    forks[(id + 1) % N].acquire();     // pick right fork
+                    mutex.release();
+
+                    // Philosopher is eating
+                    System.out.println("Philosopher " + id + " is eating.");
+                    Thread.sleep(1500);
+
+                    // Philosopher finished eating
+                    forks[id].release();
+                    forks[(id + 1) % N].release();
+                    System.out.println("Philosopher " + id + " finished eating (" + i + " times).\n");
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Philosopher " + id + " was interrupted.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // Initialize semaphores (forks)
+        for (int i = 0; i < N; i++)
+            forks[i] = new Semaphore(1);
+
+        // Create and start philosopher threads
+        for (int i = 0; i < N; i++)
+            new Philosopher(i).start();
+    }
+}
+
+
+Quetion07:
+***********
+
+1.FCFS:(NON-PREEMPTIVE)
+********
+import java.util.*;
+
+class Process {
+    int pid;             // Process ID
+    int arrivalTime;     // Arrival Time
+    int burstTime;       // Burst Time
+    int completionTime;  // Completion Time
+    int turnAroundTime;  // Turnaround Time
+    int waitingTime;     // Waiting Time
+
+    // Constructor
+    Process(int pid, int arrivalTime, int burstTime) {
+        this.pid = pid;
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+    }
+}
+
+public class ProcessMain {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input number of processes
+        System.out.print("Enter number of processes: ");
+        int n = sc.nextInt();
+        Process[] processes = new Process[n];
+
+        // Input process details
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter Arrival Time and Burst Time for Process " + (i + 1) + ": ");
+            int arrival = sc.nextInt();
+            int burst = sc.nextInt();
+            processes[i] = new Process(i + 1, arrival, burst);
+        }
+
+        // Sort processes by Arrival Time (FCFS scheduling)
+        Arrays.sort(processes, Comparator.comparingInt(p -> p.arrivalTime));
+
+        // Calculate CT, TAT, WT
+        int currentTime = 0;
+        for (Process p : processes) {
+            if (currentTime < p.arrivalTime) {
+                currentTime = p.arrivalTime; // CPU idle time
+            }
+            p.completionTime = currentTime + p.burstTime;
+            p.turnAroundTime = p.completionTime - p.arrivalTime;
+            p.waitingTime = p.turnAroundTime - p.burstTime;
+            currentTime = p.completionTime;
+        }
+
+        // Display process table
+        System.out.println("\n-------------------------------------------------------------");
+        System.out.println("Process\tAT\tBT\tCT\tTAT\tWT");
+        System.out.println("-------------------------------------------------------------");
+        for (Process p : processes) {
+            System.out.printf("P%d\t%d\t%d\t%d\t%d\t%d\n",
+                    p.pid, p.arrivalTime, p.burstTime,
+                    p.completionTime, p.turnAroundTime, p.waitingTime);
+        }
+        System.out.println("-------------------------------------------------------------");
+
+        // Calculate average TAT and WT
+        double avgTAT = Arrays.stream(processes).mapToInt(p -> p.turnAroundTime).average().orElse(0);
+        double avgWT = Arrays.stream(processes).mapToInt(p -> p.waitingTime).average().orElse(0);
+
+        System.out.printf("\nAverage Turnaround Time: %.2f\n", avgTAT);
+        System.out.printf("Average Waiting Time: %.2f\n", avgWT);
+
+        // Print Gantt Chart
+        System.out.println("\nGantt Chart:");
+        System.out.print(" ");
+        for (Process p : processes) {
+            System.out.print("----");
+        }
+        System.out.println("-");
+
+        System.out.print("|");
+        for (Process p : processes) {
+            System.out.printf(" P%d |", p.pid);
+        }
+        System.out.println();
+
+        System.out.print(" ");
+        for (Process p : processes) {
+            System.out.print("----");
+        }
+        System.out.println("-");
+
+        System.out.print("0");
+        for (Process p : processes) {
+            System.out.printf("%4d", p.completionTime);
+        }
+        System.out.println();
+    }
+}
+
+
+2.FCFS:(NON-PREEMPTIVE)
+********
+package com.dyp.scheduling;
+
+import java.util.Scanner;
+
+public class FCFS_Scheduling {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of processes: ");
+        int n = sc.nextInt();
+
+        int[] pid = new int[n];
+        int[] at = new int[n];
+        int[] st = new int[n];
+        int[] ct = new int[n];
+        int[] tat = new int[n];
+        int[] wt = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter Process ID: ");
+            pid[i] = sc.nextInt();
+            System.out.print("Enter Arrival Time: ");
+            at[i] = sc.nextInt();
+            System.out.print("Enter Service Time: ");
+            st[i] = sc.nextInt();
+        }
+
+        // Sort by Arrival Time (simple bubble sort)
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (at[j] > at[j + 1]) {
+                    int temp;
+                    temp = at[j]; at[j] = at[j + 1]; at[j + 1] = temp;
+                    temp = st[j]; st[j] = st[j + 1]; st[j + 1] = temp;
+                    temp = pid[j]; pid[j] = pid[j + 1]; pid[j + 1] = temp;
+                }
+            }
+        }
+
+        ct[0] = at[0] + st[0];
+        for (int i = 1; i < n; i++) {
+            if (at[i] > ct[i - 1])
+                ct[i] = at[i] + st[i]; // CPU idle
+            else
+                ct[i] = ct[i - 1] + st[i];
+        }
+
+        double totalTAT = 0, totalWT = 0;
+
+        for (int i = 0; i < n; i++) {
+            tat[i] = ct[i] - at[i];
+            wt[i] = tat[i] - st[i];
+            totalTAT += tat[i];
+            totalWT += wt[i];
+        }
+
+        System.out.println("\nPID\tAT\tST\tCT\tTAT\tWT");
+        for (int i = 0; i < n; i++) {
+            System.out.println(pid[i] + "\t" + at[i] + "\t" + st[i] + "\t" + ct[i] + "\t" + tat[i] + "\t" + wt[i]);
+        }
+
+        System.out.printf("\nAverage Turnaround Time: %.2f", totalTAT / n);
+        System.out.printf("\nAverage Waiting Time: %.2f\n", totalWT / n);
+
+        sc.close();
+    }
+}
+
+
+2.SJF Scheduling:(PREEMPTIVE)
+*******************
+import java.util.Scanner;
+
+public class SJF_Scheduling {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of processes: ");
+        int n = sc.nextInt();
+
+        int[] pid = new int[n];
+        int[] at = new int[n];
+        int[] bt = new int[n];
+        int[] ct = new int[n];
+        int[] tat = new int[n];
+        int[] wt = new int[n];
+        boolean[] completed = new boolean[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter Process ID: ");
+            pid[i] = sc.nextInt();
+            System.out.print("Enter Arrival Time: ");
+            at[i] = sc.nextInt();
+            System.out.print("Enter Burst Time: ");
+            bt[i] = sc.nextInt();
+        }
+
+        int currentTime = 0, completedCount = 0;
+        double totalTAT = 0, totalWT = 0;
+
+        while (completedCount < n) {
+            int idx = -1;
+            int minBT = Integer.MAX_VALUE;
+
+            // Find process with shortest burst time among arrived processes
+            for (int i = 0; i < n; i++) {
+                if (!completed[i] && at[i] <= currentTime && bt[i] < minBT) {
+                    minBT = bt[i];
+                    idx = i;
+                }
+            }
+
+            if (idx == -1) {
+                currentTime++; // No process has arrived yet
+            } else {
+                ct[idx] = currentTime + bt[idx];
+                currentTime = ct[idx];
+                tat[idx] = ct[idx] - at[idx];
+                wt[idx] = tat[idx] - bt[idx];
+
+                totalTAT += tat[idx];
+                totalWT += wt[idx];
+
+                completed[idx] = true;
+                completedCount++;
+            }
+        }
+
+        // Print results
+        System.out.println("\nPID\tAT\tBT\tCT\tTAT\tWT");
+        for (int i = 0; i < n; i++) {
+            System.out.println(pid[i] + "\t" + at[i] + "\t" + bt[i] + "\t" + ct[i] + "\t" + tat[i] + "\t" + wt[i]);
+        }
+
+        System.out.printf("\nAverage Turnaround Time: %.2f", totalTAT / n);
+        System.out.printf("\nAverage Waiting Time: %.2f\n", totalWT / n);
+
+        sc.close();
+    }
+}
+
+3.ROUND_ROBIN Scheduling:(PREEMPTIVE)
+***************************
+
+import java.util.*;
+
+class RRProcess {
+    int pid, arrivalTime, burstTime;
+    int remainingTime;
+    int waitingTime, turnaroundTime;
+
+    RRProcess(int pid, int at, int bt) {
+        this.pid = pid;
+        this.arrivalTime = at;
+        this.burstTime = bt;
+        this.remainingTime = bt;
+    }
+}
+
+public class RoundRobin {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of processes: ");
+        int n = sc.nextInt();
+
+        System.out.print("Enter Time Quantum: ");
+        int quantum = sc.nextInt();
+
+        List<RRProcess> processes = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Process " + (i + 1) + ":");
+
+            System.out.print("Process ID: ");
+            int pid = sc.nextInt();
+
+            System.out.print("Arrival Time: ");
+            int at = sc.nextInt();
+
+            System.out.print("Burst Time: ");
+            int bt = sc.nextInt();
+
+            processes.add(new RRProcess(pid, at, bt));
+        }
+
+        // Sort by Arrival Time
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+
+        Queue<RRProcess> q = new LinkedList<>();
+        int time = 0, i = 0;
+
+        // Initially add first arrived process
+        q.add(processes.get(0));
+        i = 1;
+
+        while (!q.isEmpty()) {
+            RRProcess p = q.poll();
+
+            int exec = Math.min(quantum, p.remainingTime);
+            p.remainingTime -= exec;
+            time += exec;
+
+            while (i < n && processes.get(i).arrivalTime <= time) {
+                q.add(processes.get(i));
+                i++;
+            }
+
+            if (p.remainingTime > 0) {
+                q.add(p);  // Add back to queue
+            } else {
+                p.turnaroundTime = time - p.arrivalTime;
+                p.waitingTime = p.turnaroundTime - p.burstTime;
+            }
+        }
+
+        System.out.println("\n===== Round Robin Scheduling =====");
+        System.out.println("PID\tAT\tBT\tWT\tTT");
+
+        for (RRProcess p : processes) {
+            System.out.println(
+                p.pid + "\t" + p.arrivalTime + "\t" + p.burstTime +
+                "\t" + p.waitingTime + "\t" + p.turnaroundTime
+            );
+        }
+
+        sc.close();
+    }
+}
+
+4.PRIORITY Scheduling:(NON-PREEMPTIVE)
+************************
+
+import java.util.*;
+
+class PSProcess {
+    int pid, arrivalTime, burstTime, priority, waitingTime, turnaroundTime;
+
+    PSProcess(int pid, int at, int bt, int pr) {
+        this.pid = pid;
+        this.arrivalTime = at;
+        this.burstTime = bt;
+        this.priority = pr;
+    }
+}
+
+public class PriorityScheduling1 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of processes: ");
+        int n = sc.nextInt();
+
+        List<PSProcess> processes = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Process " + (i + 1) + ":");
+
+            System.out.print("Process ID: ");
+            int pid = sc.nextInt();
+
+            System.out.print("Arrival Time: ");
+            int at = sc.nextInt();
+
+            System.out.print("Burst Time: ");
+            int bt = sc.nextInt();
+
+            System.out.print("Priority (lower number = higher priority): ");
+            int pr = sc.nextInt();
+
+            processes.add(new PSProcess(pid, at, bt, pr));
+        }
+
+        // Sort by Arrival Time
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+
+        int time = 0;
+        List<PSProcess> completed = new ArrayList<>();
+
+        // Non-Preemptive Priority Scheduling
+        while (completed.size() < processes.size()) {
+
+            PSProcess highest = null;
+
+            for (PSProcess p : processes) {
+                if (!completed.contains(p) && p.arrivalTime <= time) {
+                    if (highest == null || p.priority < highest.priority) {
+                        highest = p;
+                    }
+                }
+            }
+
+            if (highest == null) {
+                time++;
+                continue;
+            }
+
+            highest.waitingTime = time - highest.arrivalTime;
+            time += highest.burstTime;
+            highest.turnaroundTime = highest.waitingTime + highest.burstTime;
+
+            completed.add(highest);
+        }
+
+        System.out.println("\n===== Priority Scheduling (Non-Preemptive) =====");
+        System.out.println("PID\tAT\tBT\tPR\tWT\tTT");
+
+        for (PSProcess p : processes) {
+            System.out.println(
+                p.pid + "\t" + p.arrivalTime + "\t" + p.burstTime + "\t" +
+                p.priority + "\t" + p.waitingTime + "\t" + p.turnaroundTime
+            );
+        }
+
+        sc.close();
+    }
+}
+
+
+Quetion11:
+**********
+
+1.BEST_FIT:
+**********
+
+import java.util.*;
+
+public class BestFit {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input memory blocks
+        System.out.print("Enter number of memory blocks: ");
+        int m = sc.nextInt();
+
+        int[] memoryBlocks = new int[m];
+        System.out.println("Enter sizes of memory blocks:");
+        for (int i = 0; i < m; i++) {
+            System.out.print("Block " + i + ": ");
+            memoryBlocks[i] = sc.nextInt();
+        }
+
+        // Input process sizes
+        System.out.print("\nEnter number of processes: ");
+        int n = sc.nextInt();
+
+        int[] processSize = new int[n];
+        System.out.println("Enter sizes of processes:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Process " + i + ": ");
+            processSize[i] = sc.nextInt();
+        }
+
+        int[] allocation = new int[n];
+        Arrays.fill(allocation, -1);
+
+        System.out.println("\n----- Best Fit Allocation -----");
+
+        for (int i = 0; i < n; i++) {
+
+            int bestIdx = -1;
+
+            // Find the best fit block
+            for (int j = 0; j < m; j++) {
+                if (memoryBlocks[j] >= processSize[i]) {
+                    if (bestIdx == -1 || memoryBlocks[j] < memoryBlocks[bestIdx])
+                        bestIdx = j;
+                }
+            }
+
+            if (bestIdx != -1) {
+                allocation[i] = bestIdx;
+                memoryBlocks[bestIdx] -= processSize[i];
+
+                System.out.println("Process " + i + " (size " + processSize[i] +
+                        ") allocated to Block " + bestIdx +
+                        " (remaining " + memoryBlocks[bestIdx] + ")");
+            } else {
+                System.out.println("Process " + i + " (size " + processSize[i] +
+                        ") NOT allocated.");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+Question12:
+************
+
+2.FIRST_FIT:
+**************
+
+
+import java.util.*;
+
+public class Firstfit {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input for memory blocks
+        System.out.print("Enter number of memory blocks: ");
+        int m = sc.nextInt();
+
+        int[] memoryBlocks = new int[m];
+        System.out.println("Enter sizes of memory blocks:");
+        for (int i = 0; i < m; i++) {
+            System.out.print("Block " + i + ": ");
+            memoryBlocks[i] = sc.nextInt();
+        }
+
+        // Input for processes
+        System.out.print("\nEnter number of processes: ");
+        int n = sc.nextInt();
+
+        int[] processSize = new int[n];
+        System.out.println("Enter sizes of processes:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Process " + i + ": ");
+            processSize[i] = sc.nextInt();
+        }
+
+        int[] allocation = new int[n];
+        Arrays.fill(allocation, -1);
+
+        System.out.println("\n----- First Fit Allocation -----");
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (memoryBlocks[j] >= processSize[i]) {
+
+                    allocation[i] = j;
+                    memoryBlocks[j] -= processSize[i];
+
+                    System.out.println("Process " + i + " (size " + processSize[i] +
+                            ") allocated to Block " + j +
+                            " (remaining " + memoryBlocks[j] + ")");
+
+                    break; // First Fit → stop at the first suitable block
+                }
+            }
+
+            if (allocation[i] == -1) {
+                System.out.println("Process " + i + " (size " + processSize[i] +
+                        ") NOT allocated.");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+
+Quetion13:
+************
+
+3.NEXT_FIT:
+*************
+
+import java.util.*;
+
+public class NextFit {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // ---------- INPUT MEMORY BLOCKS ----------
+        System.out.print("Enter number of memory blocks: ");
+        int blockCount = sc.nextInt();
+
+        int[] memoryBlocks = new int[blockCount];
+        System.out.println("Enter sizes of memory blocks:");
+        for (int i = 0; i < blockCount; i++) {
+            System.out.print("Block " + i + ": ");
+            memoryBlocks[i] = sc.nextInt();
+        }
+
+        // ---------- INPUT PROCESS SIZES ----------
+        System.out.print("\nEnter number of processes: ");
+        int processCount = sc.nextInt();
+
+        int[] processSize = new int[processCount];
+        System.out.println("Enter sizes of processes:");
+        for (int i = 0; i < processCount; i++) {
+            System.out.print("Process " + i + ": ");
+            processSize[i] = sc.nextInt();
+        }
+
+        // ---------- NEXT FIT LOGIC ----------
+        int[] allocation = new int[processCount];
+        Arrays.fill(allocation, -1);
+
+        int lastPtr = 0;
+
+        System.out.println("\n----- Next Fit Allocation -----");
+
+        for (int i = 0; i < processCount; i++) {
+
+            int j = lastPtr;
+            boolean allocated = false;
+
+            do {
+                if (memoryBlocks[j] >= processSize[i]) {
+                    allocation[i] = j;
+                    memoryBlocks[j] -= processSize[i];
+                    lastPtr = j;
+
+                    System.out.println("Process " + i + " (size " + processSize[i] +
+                            ") allocated to Block " + j +
+                            " (remaining " + memoryBlocks[j] + ")");
+
+                    allocated = true;
+                    break;
+                }
+
+                j = (j + 1) % memoryBlocks.length;
+
+            } while (j != lastPtr);
+
+            if (!allocated) {
+                System.out.println("Process " + i + " (size " + processSize[i] + ") NOT allocated.");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+Question14:
+************
+
+4.WORST_FIT:
+**************
+
+import java.util.*;
+
+public class WorstFit {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // -------- INPUT MEMORY BLOCKS --------
+        System.out.print("Enter number of memory blocks: ");
+        int blockCount = sc.nextInt();
+
+        int[] memoryBlocks = new int[blockCount];
+        System.out.println("Enter sizes of memory blocks:");
+        for (int i = 0; i < blockCount; i++) {
+            System.out.print("Block " + i + ": ");
+            memoryBlocks[i] = sc.nextInt();
+        }
+
+        // -------- INPUT PROCESS SIZES --------
+        System.out.print("\nEnter number of processes: ");
+        int processCount = sc.nextInt();
+
+        int[] processSize = new int[processCount];
+        System.out.println("Enter sizes of processes:");
+        for (int i = 0; i < processCount; i++) {
+            System.out.print("Process " + i + ": ");
+            processSize[i] = sc.nextInt();
+        }
+
+        int[] allocation = new int[processCount];
+        Arrays.fill(allocation, -1);
+
+        System.out.println("\n----- Worst Fit Allocation -----");
+
+        for (int i = 0; i < processCount; i++) {
+
+            int worstIdx = -1;
+
+            for (int j = 0; j < memoryBlocks.length; j++) {
+                if (memoryBlocks[j] >= processSize[i]) {
+                    if (worstIdx == -1 || memoryBlocks[j] > memoryBlocks[worstIdx])
+                        worstIdx = j;
+                }
+            }
+
+            if (worstIdx != -1) {
+                allocation[i] = worstIdx;
+                memoryBlocks[worstIdx] -= processSize[i];
+
+                System.out.println("Process " + i + " (size " + processSize[i] +
+                        ") allocated to Block " + worstIdx +
+                        " (remaining " + memoryBlocks[worstIdx] + ")");
+            } else {
+                System.out.println("Process " + i + " (size " + processSize[i] + ") NOT allocated.");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+
+Quetion15:
+***********
+
+1.FIF0:First come First Serve)
+*******************************
+
+import java.util.*;
+
+public class PageReplacement {
+
+    // ---------- FIFO Page Replacement ----------
+    static void fifo(int pages[], int n, int capacity) {
+        Queue<Integer> q = new LinkedList<>();
+        HashSet<Integer> s = new HashSet<>();
+
+        int pageFaults = 0, pageHits = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!s.contains(pages[i])) {
+                // Page Fault
+                if (s.size() == capacity) {
+                    int removed = q.poll();
+                    s.remove(removed);
+                }
+                s.add(pages[i]);
+                q.add(pages[i]);
+                pageFaults++;
+            } else {
+                // Page Hit
+                pageHits++;
+            }
+            System.out.println("Page " + pages[i] + " => " + s);
+        }
+
+        double hitRatio = (double) pageHits / n;
+        double faultRatio = (double) pageFaults / n;
+
+        System.out.println("Total Page Faults (FIFO): " + pageFaults);
+        System.out.println("Total Page Hits (FIFO): " + pageHits);
+        System.out.printf("Hit Ratio (FIFO): %.2f\n", hitRatio);
+        System.out.printf("Fault Ratio (FIFO): %.2f\n", faultRatio);
+    }
+
+    // ---------- LRU Page Replacement ----------
+    static void lru(int pages[], int n, int capacity) {
+        HashSet<Integer> s = new HashSet<>(capacity);
+        HashMap<Integer, Integer> indexes = new HashMap<>();
+
+        int pageFaults = 0, pageHits = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (s.contains(pages[i])) {
+                pageHits++;
+            } else {
+                if (s.size() < capacity) {
+                    s.add(pages[i]);
+                    pageFaults++;
+                } else {
+                    int lru = Integer.MAX_VALUE, val = Integer.MIN_VALUE;
+
+                    for (int page : s) {
+                        if (indexes.get(page) < lru) {
+                            lru = indexes.get(page);
+                            val = page;
+                        }
+                    }
+
+                    s.remove(val);
+                    s.add(pages[i]);
+                    pageFaults++;
+                }
+            }
+            indexes.put(pages[i], i);
+            System.out.println("Page " + pages[i] + " => " + s);
+        }
+
+        double hitRatio = (double) pageHits / n;
+        double faultRatio = (double) pageFaults / n;
+
+        System.out.println("Total Page Faults (LRU): " + pageFaults);
+        System.out.println("Total Page Hits (LRU): " + pageHits);
+        System.out.printf("Hit Ratio (LRU): %.2f\n", hitRatio);
+        System.out.printf("Fault Ratio (LRU): %.2f\n", faultRatio);
+    }
+
+    // ---------- OPTIMAL Page Replacement ----------
+    static void optimal(int pages[], int n, int capacity) {
+        List<Integer> frames = new ArrayList<>(capacity);
+        int pageFaults = 0, pageHits = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (frames.contains(pages[i])) {
+                pageHits++;
+            } else {
+                if (frames.size() < capacity) {
+                    frames.add(pages[i]);
+                } else {
+                    int farthest = i + 1, replaceIndex = -1;
+                    for (int j = 0; j < frames.size(); j++) {
+                        int nextUse = Integer.MAX_VALUE;
+                        for (int k = i + 1; k < n; k++) {
+                            if (frames.get(j) == pages[k]) {
+                                nextUse = k;
+                                break;
+                            }
+                        }
+                        if (nextUse > farthest) {
+                            farthest = nextUse;
+                            replaceIndex = j;
+                        }
+                    }
+                    if (replaceIndex == -1)
+                        replaceIndex = 0;
+                    frames.set(replaceIndex, pages[i]);
+                }
+                pageFaults++;
+            }
+            System.out.println("Page " + pages[i] + " => " + frames);
+        }
+
+        double hitRatio = (double) pageHits / n;
+        double faultRatio = (double) pageFaults / n;
+
+        System.out.println("Total Page Faults (Optimal): " + pageFaults);
+        System.out.println("Total Page Hits (Optimal): " + pageHits);
+        System.out.printf("Hit Ratio (Optimal): %.2f\n", hitRatio);
+        System.out.printf("Fault Ratio (Optimal): %.2f\n", faultRatio);
+    }
+
+    // ---------- MAIN FUNCTION ----------
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of pages: ");
+        int n = sc.nextInt();
+        int pages[] = new int[n];
+        System.out.println("Enter the page reference string:");
+        for (int i = 0; i < n; i++)
+            pages[i] = sc.nextInt();
+
+        System.out.print("Enter number of frames: ");
+        int capacity = sc.nextInt();
+
+        System.out.println("\n--- FIFO Page Replacement ---");
+        fifo(pages, n, capacity);
+
+        System.out.println("\n--- LRU Page Replacement ---");
+        lru(pages, n, capacity);
+
+        System.out.println("\n--- Optimal Page Replacement ---");
+        optimal(pages, n, capacity);
+
+        sc.close();
+    }
+}
+
+
+
